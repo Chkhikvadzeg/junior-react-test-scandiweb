@@ -1,16 +1,16 @@
-import Header from '../header/header';
+import Header from './Header';
 import React from 'react';
 
-class Kids extends React.Component {
+class Home extends React.Component {
     render() {
         return (
             <div className='category' >
-                <Header path='kids' />
+                <Header path='home' />
             </div>
         )
     }
 }
 
-export default Kids;
+export default Home;
 
 

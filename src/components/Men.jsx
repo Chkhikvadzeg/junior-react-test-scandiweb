@@ -1,4 +1,4 @@
-import Header from '../header/header';
+import Header from './Header';
 import React from 'react';
 
 class Men extends React.Component {
