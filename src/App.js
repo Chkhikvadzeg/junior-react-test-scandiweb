@@ -1,25 +1,20 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import Home  from './components/Home';
+import Home from './components/Home';
 import React from 'react';
 import Men from './components/Men';
 import Kids from './components/Kids';
 import styled from 'styled-components';
-// import { useQuery } from '@apollo/client';
-// import { GET_GEN_3 } from './gql/Query';
-// import { GET_CURRENCIES } from './gql/Currencies';
+import { useState } from 'react';
+import { UserProvider } from './components/context/CurrencyContext';
 
-// function Query() {
-//   const { data } = useQuery(GET_GEN_3);
-//   const { currencies } = useQuery(GET_CURRENCIES);
-//   console.log(data, currencies);
-// }
+const App = () => {
+  const [currencies, setCurrency] = useState();
+  const [selectedCurrencyIndex, setSelectedCurrencyIndex] = useState(0);
+  const changingCurrency = { currencies, setCurrency, selectedCurrencyIndex, setSelectedCurrencyIndex };
 
-
-class App extends React.Component {
-
-  render() {
-    return (
+  return (
+    <UserProvider value={changingCurrency}>
       <Container>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,8 +22,8 @@ class App extends React.Component {
           <Route path="/kids" element={<Kids />} />
         </Routes>
       </Container>
-    );
-  }
+    </UserProvider>
+  );
 }
 
 const Container = styled.div`

@@ -5,9 +5,19 @@ import logo from '../assets/logo.svg'
 import cartImg from '../assets/cart.svg'
 import { gql } from "@apollo/client";
 import { client } from '../index'
-
+import currencyContext from './context/CurrencyContext'
 
 class Header extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currencyIndex: 0
+    }
+  }
+
+  static contextType = currencyContext;
+
   componentDidMount() {
     this.getInitialData();
   }
@@ -27,9 +37,7 @@ class Header extends React.Component {
     });
 
     this.subobj = watchQuery.subscribe(({ data }) => {
-      this.setState({
-        currencies: data.currencies
-      })
+      this.context.setCurrency(data.currencies);
     });
 
   };
@@ -38,39 +46,31 @@ class Header extends React.Component {
     this.subobj.unsubscribe();
   }
 
+  changeHandler = (e) => {
+    const currencyIndex = this.context.currencies.findIndex(currency => currency.label === e.target.value);
+    this.context.setSelectedCurrencyIndex(currencyIndex);
+  }
+
   render() {
     return (
       <StyledHeader color='light'>
         <nav>
           <StyledNavList>
-            {
-              this.props.path === 'home'
-                ? <ActiveHeaderNavItem active> <StyledLink to='/'>Women</StyledLink> </ActiveHeaderNavItem>
-                : <ActiveHeaderNavItem> <StyledLink to='/'>Women</StyledLink> </ActiveHeaderNavItem>
-            }
-            {
-              this.props.path === 'men'
-                ? <ActiveHeaderNavItem active> <StyledLink to='/men'>Men</StyledLink> </ActiveHeaderNavItem>
-                : <ActiveHeaderNavItem> <StyledLink to='/men'>Men</StyledLink> </ActiveHeaderNavItem>
-            }
-            {
-              this.props.path === 'kids'
-                ? <ActiveHeaderNavItem active> <StyledLink to='/kids'>Kids</StyledLink> </ActiveHeaderNavItem>
-                : <ActiveHeaderNavItem> <StyledLink to='/kids'>Kids</StyledLink> </ActiveHeaderNavItem>
-            }
-
+            <HeaderNavItem active={this.props.path === 'home' ? true : false}> <StyledLink to='/'>Women</StyledLink> </HeaderNavItem>
+            <HeaderNavItem active={this.props.path === 'men' ? true : false}> <StyledLink to='/men'>Men</StyledLink> </HeaderNavItem>
+            <HeaderNavItem active={this.props.path === 'kids' ? true : false}> <StyledLink to='/kids'>Kids</StyledLink> </HeaderNavItem>
           </StyledNavList>
         </nav>
         <img src={logo} alt="Logo" />
         <HeaderRight className='header__right'>
-          <select className='currency-select' name="currency-select" id="currency-select">
-            {this.state && this.state.currencies && this.state.currencies.map((currency, index) => {
-              return <option key={index} value={currency.label}>{currency.symbol}</option>
+          <select value={this.context.currencies ? this.context.currencies[this.context.selectedCurrencyIndex].label : 'USD'} onChange={this.changeHandler} className='currency-select' name="currency-select" id="currency-select">
+            {this.context && this.context.currencies && this.context.currencies.map((currency, index) => {
+              return <option key={index} value={currency.label} > {currency.symbol}</option>
             })}
           </select>
           <button className='cart-button'><img src={cartImg} alt="Cart" /></button>
         </HeaderRight>
-      </StyledHeader>
+      </StyledHeader >
     )
   }
 }
@@ -89,7 +89,7 @@ const StyledNavList = styled.ul`
   align-items: center;
 `
 
-const ActiveHeaderNavItem = styled.li`
+const HeaderNavItem = styled.li`
   position: relative;
   color: ${props => props.active ? '#5ECE7B' : "black"};
 
@@ -113,6 +113,11 @@ const StyledLink = styled(Link)`
   line-height: 1.25;
   text-decoration: none;
   padding: 4px 16px 16px;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    color: var(--clr-green);
+  }
 `;
 
 const HeaderRight = styled.div`
