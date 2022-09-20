@@ -1,9 +1,9 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import Home from './components/Home';
+import All from './components/All';
 import React from 'react';
-import Men from './components/Men';
-import Kids from './components/Kids';
+import Clothes from './components/Clothes';
+import Tech from './components/Tech';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { UserProvider } from './components/context/CurrencyContext';
@@ -17,9 +17,9 @@ const App = () => {
     <UserProvider value={changingCurrency}>
       <Container>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/men" element={<Men />} />
-          <Route path="/kids" element={<Kids />} />
+          <Route path="/" element={<All />} />
+          <Route path="/clothes" element={<Clothes />} />
+          <Route path="/tech" element={<Tech />} />
         </Routes>
       </Container>
     </UserProvider>

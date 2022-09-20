@@ -1,16 +1,20 @@
 import Header from './Header';
 import React from 'react';
+import Main from './Main';
 
-class Men extends React.Component {
+class Tech extends React.Component {
+
+
     render() {
         return (
             <div className='category' >
-                <Header path='men' />
+                <Header path='tech' />
+                <Main category="tech" />
             </div>
         )
     }
 }
 
-export default Men;
+export default Tech;
 
 

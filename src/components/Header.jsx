@@ -56,13 +56,13 @@ class Header extends React.Component {
       <StyledHeader color='light'>
         <nav>
           <StyledNavList>
-            <HeaderNavItem active={this.props.path === 'home' ? true : false}> <StyledLink to='/'>Women</StyledLink> </HeaderNavItem>
-            <HeaderNavItem active={this.props.path === 'men' ? true : false}> <StyledLink to='/men'>Men</StyledLink> </HeaderNavItem>
-            <HeaderNavItem active={this.props.path === 'kids' ? true : false}> <StyledLink to='/kids'>Kids</StyledLink> </HeaderNavItem>
+            <HeaderNavItem active={this.props.path === 'all' ? true : false}> <StyledLink to='/'>All</StyledLink> </HeaderNavItem>
+            <HeaderNavItem active={this.props.path === 'clothes' ? true : false}> <StyledLink to='/clothes'>Clothes</StyledLink> </HeaderNavItem>
+            <HeaderNavItem active={this.props.path === 'tech' ? true : false}> <StyledLink to='/tech'>Tech</StyledLink> </HeaderNavItem>
           </StyledNavList>
         </nav>
         <img src={logo} alt="Logo" />
-        <HeaderRight className='header__right'>
+        <HeaderRight>
           <select value={this.context.currencies ? this.context.currencies[this.context.selectedCurrencyIndex].label : 'USD'} onChange={this.changeHandler} className='currency-select' name="currency-select" id="currency-select">
             {this.context && this.context.currencies && this.context.currencies.map((currency, index) => {
               return <option key={index} value={currency.label} > {currency.symbol}</option>
