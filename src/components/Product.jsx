@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-// import { useParams } from 'react-router-dom'
+import Header from './Header'
+import { withRouter } from 'react-router-dom'
 
-export default class Product extends Component {
-
-
-
+class Product extends Component {
+  componentDidMount() {
+    console.log(this.props.match.params.id)
+  }
   render() {
-
     return (
-      <div>Product</div>
+      <Header />
     )
   }
 }
+
+export default withRouter(Product)

@@ -7,10 +7,10 @@ class Tech extends React.Component {
 
     render() {
         return (
-            <div className='category' >
+            <>
                 <Header path='tech' />
                 <Main category="tech" />
-            </div>
+            </>
         )
     }
 }

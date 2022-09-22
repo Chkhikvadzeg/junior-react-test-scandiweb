@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import All from './components/All';
 import React from 'react';
 import Clothes from './components/Clothes';
@@ -17,12 +17,20 @@ const App = () => {
   return (
     <UserProvider value={changingCurrency}>
       <Container>
-        <Routes>
-          <Route path="/" element={<All />} />
-          <Route path="/clothes" element={<Clothes />} />
-          <Route path="/tech" element={<Tech />} />
-          <Route path="/product/:id" element={<Product />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/">
+            <All />
+          </Route>
+          <Route path="/clothes">
+            <Clothes />
+          </Route>
+          <Route path="/tech">
+            <Tech />
+          </Route>
+          <Route path="/product/:id">
+            <Product />
+          </Route>
+        </Switch>
       </Container>
     </UserProvider>
   );

@@ -7,10 +7,10 @@ class All extends React.Component {
 
     render() {
         return (
-            <div className='category' >
+            <>
                 <Header path='all' />
                 <Main category="all" />
-            </div>
+            </>
         )
     }
 }
