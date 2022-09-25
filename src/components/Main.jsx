@@ -54,9 +54,9 @@ export class Main extends React.Component {
 
   render() {
     return (
-      <StyledMain>
-        <StyledHeader>{this.state ? this.state.items.name : 'Nothing to show'}</StyledHeader>
-        <StyledNavList>
+      <Container>
+        <Heading>{this.state ? this.state.items.name : 'Nothing to show'}</Heading>
+        <NavList>
           {this.state && this.state.items.products.map((product) => {
             return (
               <MainCard
@@ -68,13 +68,13 @@ export class Main extends React.Component {
               />
             )
           })}
-        </StyledNavList>
-      </StyledMain>
+        </NavList>
+      </Container>
     )
   }
 }
 
-const StyledMain = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   gap: 100px;
@@ -82,13 +82,13 @@ const StyledMain = styled.div`
   line-height: 1.6;
 `;
 
-const StyledHeader = styled.header`
+const Heading = styled.h1`
   font-size: 42px;
   font-weight: 500;
   text-transform: capitalize;
 `
 
-const StyledNavList = styled.ul`
+const NavList = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;

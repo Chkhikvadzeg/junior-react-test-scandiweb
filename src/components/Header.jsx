@@ -53,7 +53,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <StyledHeader color='light'>
+      <Heading color='light'>
         <nav>
           <StyledNavList>
             <HeaderNavItem active={this.props.path === 'all' ? true : false}> <StyledLink to='/'>All</StyledLink> </HeaderNavItem>
@@ -70,12 +70,12 @@ class Header extends React.Component {
           </select>
           <button className='cart-button'><img src={cartImg} alt="Cart" /></button>
         </HeaderRight>
-      </StyledHeader >
+      </Heading >
     )
   }
 }
 
-const StyledHeader = styled.header`
+const Heading = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;

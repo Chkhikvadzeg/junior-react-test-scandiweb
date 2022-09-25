@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import emptyCart from '../assets/empty-cart.svg'
 import styled from 'styled-components';
 
@@ -23,26 +23,26 @@ export default class MainCard extends Component {
 
   render() {
     return (
-      <StyledNavItem onMouseEnter={this.mouseEnterHandler} onMouseLeave={this.mouseLeaveHandler} id={this.props.product.id} key={this.props.product.id}>
-        <DivForImage>
-          <StyledImage src={this.props.product.gallery[0]} alt={this.props.product.name} />
-          {!this.props.product.inStock ? <StyledNoItems>Out of stock</StyledNoItems> : null}
-        </DivForImage>
-        <StyledDescription color={this.props.product.inStock ? 'dark' : 'light'}>
+      <NavItem onMouseEnter={this.mouseEnterHandler} onMouseLeave={this.mouseLeaveHandler} id={this.props.product.id} key={this.props.product.id}>
+        <ImageContainer>
+          <Image src={this.props.product.gallery[0]} alt={this.props.product.name} />
+          {!this.props.product.inStock ? <Placeholder>Out of stock</Placeholder> : null}
+        </ImageContainer>
+        <Description color={this.props.product.inStock ? 'dark' : 'light'}>
           <h3 style={{ fontWeight: 300, }}>{this.props.product.name}</h3>
           <p style={{ fontWeight: 500, }}>{this.props.product.prices[this.props.currencyId].currency.symbol}{this.props.product.prices[this.props.currencyId].amount}</p>
-        </StyledDescription>
+        </Description>
         {this.state.showCart && this.props.product.inStock
-          ? <StyledLink to={`/product/${this.props.product.id}`}>
+          ? <Link to={`/product/${this.props.product.id}`}>
             <img src={emptyCart} alt="empty cart" />
-          </StyledLink>
+          </Link>
           : null}
-      </StyledNavItem>
+      </NavItem>
     )
   }
 }
 
-const StyledNavItem = styled.li`
+const NavItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -59,23 +59,23 @@ const StyledNavItem = styled.li`
  
 `
 
-const DivForImage = styled.div`
+const ImageContainer = styled.div`
   position: relative;
   height: 330px;
   overflow: hidden;
 `
 
-const StyledImage = styled.img`
+const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
 `
 
-const StyledDescription = styled.div`
+const Description = styled.div`
   color: ${props => props.color === 'dark' ? '#000' : '#A8ACB0'};  
 `;
 
-const StyledLink = styled(Link)`
+const Link = styled(RouterLink)`
   text-decoration: none;
   justify-content: center;
   align-items: center;
@@ -91,7 +91,7 @@ const StyledLink = styled(Link)`
   display: flex;
 `
 
-const StyledNoItems = styled.div`
+const Placeholder = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
